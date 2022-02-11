@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,6 +109,58 @@ class ShopServiceTest {
         String actual = shop.getProductList();
 
         assertEquals("Hemd, Hose, Bluse, Rock, ", actual);
+
+    }
+
+    @Test
+    @DisplayName("order")
+    void orderTest1() {
+
+        Product hemd = new Product(1, "Hemd");
+        Product hose = new Product(2, "Hose");
+        Product bluse = new Product(3, "Bluse");
+        Product rock = new Product(4, "Rock");
+
+        List<Integer> artikel = new LinkedList<>();
+        artikel.add(1);
+        artikel.add(2);
+
+        Order order = new Order(1, "Bestellung 1", artikel);
+
+        Map<Integer, Order> mapOfOrders = new HashMap<>();
+        mapOfOrders.put(1, order);
+
+        OrderRepo orderDatabase = new OrderRepo(mapOfOrders);
+
+        String actual = orderDatabase.getOrder(1).getOrderName();
+
+        assertEquals("Bestellung 1", actual);
+
+    }
+
+    @Test
+    @DisplayName("orderList")
+    void orderTest2() {
+
+        Product hemd = new Product(1, "Hemd");
+        Product hose = new Product(2, "Hose");
+        Product bluse = new Product(3, "Bluse");
+        Product rock = new Product(4, "Rock");
+
+        List<Integer> artikel = new LinkedList<>();
+        artikel.add(1);
+        artikel.add(2);
+
+        Order order = new Order(1, "Bestellung 1", artikel);
+
+        Map<Integer, Order> mapOfOrders = new HashMap<>();
+        mapOfOrders.put(1, order);
+
+        OrderRepo orderDatabase = new OrderRepo(mapOfOrders);
+
+        OrderRepo actual = orderDatabase;
+
+        assertEquals(orderDatabase, actual);
 
     }
 
