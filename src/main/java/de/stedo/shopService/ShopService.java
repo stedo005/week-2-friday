@@ -1,5 +1,6 @@
 package de.stedo.shopService;
 
+import java.util.List;
 import java.util.Map;
 
 public class ShopService {
@@ -13,6 +14,24 @@ public class ShopService {
 
     public ShopService(OrderRepo databaseOrders) {
         this.databaseOrders = databaseOrders;
+    }
+
+    public void add(int id, String name, List<Integer> artikelId, int orderId) {
+        Order order = new Order(id, name, artikelId);
+        databaseOrders.getOrderList().put(orderId, order);
+    }
+
+    public String getProduct(int id) {
+        return databaseProducts.getProduct(id).getProductName();
+    }
+
+    public String listProducts() {
+        String list = "";
+        int listSize = databaseProducts.getProductList().size();
+        for (int i = 1; i <= listSize; i++) {
+            list += databaseProducts.getProductList().get(i).getProductName() + ", ";
+        }
+        return list;
     }
 
     public String getOrder(int id) {
@@ -29,16 +48,5 @@ public class ShopService {
     }
 
 
-    public String getProduct(int id) {
-
-        return databaseProducts.getProductFromList(id);
-
-    }
-
-    public String getProductList() {
-
-        return databaseProducts.getProductList();
-
-    }
 
 }

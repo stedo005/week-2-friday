@@ -21,120 +21,18 @@ class ShopServiceTest {
         Product bluse = new Product(3, "Bluse");
         Product rock = new Product(4, "Rock");
 
-        Map<Integer, String> mapOfProducts = new HashMap<>();
+        Map<Integer, Product> mapOfProducts = new HashMap<>();
 
-        mapOfProducts.put(hemd.getProductId(), hemd.getProductName());
-        mapOfProducts.put(hose.getProductId(), hose.getProductName());
-        mapOfProducts.put(bluse.getProductId(), bluse.getProductName());
-        mapOfProducts.put(rock.getProductId(), rock.getProductName());
+        mapOfProducts.put(1, hemd);
+        mapOfProducts.put(2, hose);
+        mapOfProducts.put(3, bluse);
+        mapOfProducts.put(4, rock);
 
-        ProductRepo products = new ProductRepo(mapOfProducts);
+        ProductRepo productsDatabase = new ProductRepo(mapOfProducts);
+        ShopService shop = new ShopService(productsDatabase);
 
-        String actual = products.getProductFromList(1);
-
-        assertEquals("Hemd", actual);
-
-    }
-
-    @Test
-    @DisplayName("should be Hemd, Hose, Bluse, Rock, ")
-    void test2() {
-
-        Product hemd = new Product(1, "Hemd");
-        Product hose = new Product(2, "Hose");
-        Product bluse = new Product(3, "Bluse");
-        Product rock = new Product(4, "Rock");
-
-        Map<Integer, String> mapOfProducts = new HashMap<>();
-
-        mapOfProducts.put(hemd.getProductId(), hemd.getProductName());
-        mapOfProducts.put(hose.getProductId(), hose.getProductName());
-        mapOfProducts.put(bluse.getProductId(), bluse.getProductName());
-        mapOfProducts.put(rock.getProductId(), rock.getProductName());
-
-        ProductRepo products = new ProductRepo(mapOfProducts);
-
-        String actual = products.getProductList();
-
-        assertEquals("Hemd, Hose, Bluse, Rock, ", actual);
-
-    }
-
-    @Test
-    @DisplayName("should be Hemd")
-    void test3() {
-
-        Product hemd = new Product(1, "Hemd");
-        Product hose = new Product(2, "Hose");
-        Product bluse = new Product(3, "Bluse");
-        Product rock = new Product(4, "Rock");
-
-        Map<Integer, String> mapOfProducts = new HashMap<>();
-
-        mapOfProducts.put(hemd.getProductId(), hemd.getProductName());
-        mapOfProducts.put(hose.getProductId(), hose.getProductName());
-        mapOfProducts.put(bluse.getProductId(), bluse.getProductName());
-        mapOfProducts.put(rock.getProductId(), rock.getProductName());
-
-        ProductRepo databaseProducts = new ProductRepo(mapOfProducts);
-
-        ShopService shop = new ShopService(databaseProducts);
-
-        String actual = shop.getProduct(1);
-
-        assertEquals("Hemd", actual);
-
-    }
-
-    @Test
-    @DisplayName("should be Hemd, Hose, Bluse, Rock, ")
-    void test4() {
-
-        Product hemd = new Product(1, "Hemd");
-        Product hose = new Product(2, "Hose");
-        Product bluse = new Product(3, "Bluse");
-        Product rock = new Product(4, "Rock");
-
-        Map<Integer, String> mapOfProducts = new HashMap<>();
-
-        mapOfProducts.put(hemd.getProductId(), hemd.getProductName());
-        mapOfProducts.put(hose.getProductId(), hose.getProductName());
-        mapOfProducts.put(bluse.getProductId(), bluse.getProductName());
-        mapOfProducts.put(rock.getProductId(), rock.getProductName());
-
-        ProductRepo databaseProducts = new ProductRepo(mapOfProducts);
-
-        ShopService shop = new ShopService(databaseProducts);
-
-        String actual = shop.getProductList();
-
-        assertEquals("Hemd, Hose, Bluse, Rock, ", actual);
-
-    }
-
-    @Test
-    @DisplayName("order")
-    void orderTest1() {
-
-        Product hemd = new Product(1, "Hemd");
-        Product hose = new Product(2, "Hose");
-        Product bluse = new Product(3, "Bluse");
-        Product rock = new Product(4, "Rock");
-
-        List<Integer> artikel = new LinkedList<>();
-        artikel.add(1);
-        artikel.add(2);
-
-        Order order = new Order(1, "Bestellung 1", artikel);
-
-        Map<Integer, Order> mapOfOrders = new HashMap<>();
-        mapOfOrders.put(1, order);
-
-        OrderRepo orderDatabase = new OrderRepo(mapOfOrders);
-
-        String actual = orderDatabase.getOrder(1).getOrderName();
-
-        assertEquals("Bestellung 1", actual);
+        System.out.println(shop.getProduct(1));
+        System.out.println(shop.listProducts());
 
     }
 
@@ -160,6 +58,10 @@ class ShopServiceTest {
 
         OrderRepo orderDatabase = new OrderRepo(mapOfOrders);
         ShopService shop = new ShopService(orderDatabase);
+
+        System.out.println(shop.listOrders());
+
+        shop.add(3, "Bestellung 3", artikel,3);
 
         System.out.println(shop.getOrder(1));
         System.out.println(shop.listOrders());

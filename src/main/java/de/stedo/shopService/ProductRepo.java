@@ -7,28 +7,17 @@ import java.util.Objects;
 
 public class ProductRepo {
 
-    private Map<Integer, String> productList;
+    private Map<Integer, Product> productList;
 
-    public ProductRepo(Map<Integer, String> productList) {
-
+    public ProductRepo(Map<Integer, Product> productList) {
         this.productList = productList;
-
     }
 
-    public String getProductFromList(int id) {
+    public Product getProduct(int id) {
         return productList.get(id);
     }
 
-    public String getProductList() {
-
-        int productListSize = productList.size();
-        String stringProductList = "";
-
-        for (int i = 1; i <= productListSize; i++) {
-            stringProductList += productList.get(i) + ", ";
-        }
-
-        return stringProductList;
+    public Map<Integer, Product> getProductList() {
+        return productList;
     }
-
 }
