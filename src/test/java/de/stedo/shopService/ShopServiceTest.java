@@ -58,4 +58,56 @@ class ShopServiceTest {
 
     }
 
+    @Test
+    @DisplayName("should be Hemd")
+    void test3() {
+
+        Product hemd = new Product(1, "Hemd");
+        Product hose = new Product(2, "Hose");
+        Product bluse = new Product(3, "Bluse");
+        Product rock = new Product(4, "Rock");
+
+        Map<Integer, String> mapOfProducts = new HashMap<>();
+
+        mapOfProducts.put(hemd.getProductId(), hemd.getProductName());
+        mapOfProducts.put(hose.getProductId(), hose.getProductName());
+        mapOfProducts.put(bluse.getProductId(), bluse.getProductName());
+        mapOfProducts.put(rock.getProductId(), rock.getProductName());
+
+        ProductRepo databaseProducts = new ProductRepo(mapOfProducts);
+
+        ShopService shop = new ShopService(databaseProducts);
+
+        String actual = shop.getProduct(1);
+
+        assertEquals("Hemd", actual);
+
+    }
+
+    @Test
+    @DisplayName("should be Hemd, Hose, Bluse, Rock, ")
+    void test4() {
+
+        Product hemd = new Product(1, "Hemd");
+        Product hose = new Product(2, "Hose");
+        Product bluse = new Product(3, "Bluse");
+        Product rock = new Product(4, "Rock");
+
+        Map<Integer, String> mapOfProducts = new HashMap<>();
+
+        mapOfProducts.put(hemd.getProductId(), hemd.getProductName());
+        mapOfProducts.put(hose.getProductId(), hose.getProductName());
+        mapOfProducts.put(bluse.getProductId(), bluse.getProductName());
+        mapOfProducts.put(rock.getProductId(), rock.getProductName());
+
+        ProductRepo databaseProducts = new ProductRepo(mapOfProducts);
+
+        ShopService shop = new ShopService(databaseProducts);
+
+        String actual = shop.getProductList();
+
+        assertEquals("Hemd, Hose, Bluse, Rock, ", actual);
+
+    }
+
 }
