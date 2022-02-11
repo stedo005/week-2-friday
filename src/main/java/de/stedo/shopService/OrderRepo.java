@@ -14,15 +14,11 @@ public class OrderRepo {
     }
 
     public Order getOrder(int index) {
-
         return orderList.get(index);
-
     }
 
     public Map<Integer, Order> getOrderList() {
-
         return orderList;
-
     }
 
     @Override

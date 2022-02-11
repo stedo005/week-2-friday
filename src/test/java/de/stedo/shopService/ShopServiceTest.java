@@ -152,11 +152,17 @@ class ShopServiceTest {
         artikel.add(2);
 
         Order order = new Order(1, "Bestellung 1", artikel);
+        Order order1 = new Order(2, "Bestellung 2", artikel);
 
         Map<Integer, Order> mapOfOrders = new HashMap<>();
         mapOfOrders.put(1, order);
+        mapOfOrders.put(2, order1);
 
         OrderRepo orderDatabase = new OrderRepo(mapOfOrders);
+        ShopService shop = new ShopService(orderDatabase);
+
+        System.out.println(shop.getOrder(1));
+        System.out.println(shop.listOrders());
 
         OrderRepo actual = orderDatabase;
 
