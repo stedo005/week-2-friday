@@ -8,17 +8,30 @@ public class ShopService {
     private ProductRepo databaseProducts;
     private OrderRepo databaseOrders;
 
-    public ShopService(ProductRepo database) {
-        this.databaseProducts = database;
+    public ShopService(ProductRepo databaseProducts) {
+        this.databaseProducts = databaseProducts;
     }
 
     public ShopService(OrderRepo databaseOrders) {
         this.databaseOrders = databaseOrders;
     }
 
-    public void add(int id, String name, List<Integer> artikelId, int orderListId) {
-        Order order = new Order(id, name, artikelId);
-        databaseOrders.getOrderList().put(orderListId, order);
+    public ShopService(ProductRepo databaseProducts, OrderRepo databaseOrders) {
+        this.databaseProducts = databaseProducts;
+        this.databaseOrders = databaseOrders;
+    }
+
+    public void add(int orderId, String name, List<Integer> artikelIds) {
+
+        artikelIds.forEach(Integer -> {
+            boolean testArtikelIds = databaseProducts.getProductList().containsKey(Integer);
+            if (!testArtikelIds) {
+                throw new RuntimeException("Diesen Artikel gibt es nicht!");
+            }
+        });
+
+        Order order = new Order(orderId, name, artikelIds);
+        databaseOrders.getOrderList().put(orderId, order);
     }
 
     public String getProduct(int id) {
@@ -35,6 +48,9 @@ public class ShopService {
     }
 
     public String getOrder(int id) {
+        if (databaseOrders.getOrder(id) == null) {
+            return "Diese Bestellung gibt es nicht!";
+        }
         return databaseOrders.getOrder(id).getOrderName();
     }
 
