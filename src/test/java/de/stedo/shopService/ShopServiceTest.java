@@ -45,12 +45,12 @@ class ShopServiceTest {
         Product bluse = new Product(3, "Bluse");
         Product rock = new Product(4, "Rock");
 
-        List<Integer> artikel = new LinkedList<>();
-        artikel.add(1);
-        artikel.add(2);
+        List<Integer> artikelIdToAdd = new LinkedList<>();
+        artikelIdToAdd.add(1);
+        artikelIdToAdd.add(2);
 
-        Order order = new Order(1, "Bestellung 1", artikel);
-        Order order1 = new Order(2, "Bestellung 2", artikel);
+        Order order = new Order(1, "Bestellung 1", artikelIdToAdd);
+        Order order1 = new Order(2, "Bestellung 2", artikelIdToAdd);
 
         Map<Integer, Order> mapOfOrders = new HashMap<>();
         mapOfOrders.put(1, order);
@@ -61,7 +61,7 @@ class ShopServiceTest {
 
         System.out.println(shop.listOrders());
 
-        shop.add(3, "Bestellung 3", artikel,3);
+        shop.add(7, "Bestellung 3", artikelIdToAdd,3);
 
         System.out.println(shop.getOrder(1));
         System.out.println(shop.listOrders());

@@ -16,9 +16,9 @@ public class ShopService {
         this.databaseOrders = databaseOrders;
     }
 
-    public void add(int id, String name, List<Integer> artikelId, int orderId) {
+    public void add(int id, String name, List<Integer> artikelId, int orderListId) {
         Order order = new Order(id, name, artikelId);
-        databaseOrders.getOrderList().put(orderId, order);
+        databaseOrders.getOrderList().put(orderListId, order);
     }
 
     public String getProduct(int id) {
@@ -46,7 +46,5 @@ public class ShopService {
         }
         return list;
     }
-
-
 
 }
