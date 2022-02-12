@@ -8,14 +8,6 @@ public class ShopService {
     private ProductRepo databaseProducts;
     private OrderRepo databaseOrders;
 
-    public ShopService(ProductRepo databaseProducts) {
-        this.databaseProducts = databaseProducts;
-    }
-
-    public ShopService(OrderRepo databaseOrders) {
-        this.databaseOrders = databaseOrders;
-    }
-
     public ShopService(ProductRepo databaseProducts, OrderRepo databaseOrders) {
         this.databaseProducts = databaseProducts;
         this.databaseOrders = databaseOrders;
